@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".temperature">
+
+    <!-- '나의 위치' 텍스트 추가 -->
+    <TextView
+        android:id="@+id/myLocationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="나의 위치"
+        android:textSize="16sp"
+        android:textColor="#2c3e50"
+        android:fontFamily="@font/notosans"
+        app:layout_constraintBottom_toTopOf="@+id/cityNameText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
+        android:layout_marginTop="80dp"/>
+
+    <!-- '현재 위치' 텍스트 -->
+    <TextView
+        android:id="@+id/cityNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="현재 위치"
+        android:drawableRight="@drawable/baseline_place_24"
+        android:fontFamily="@font/notosans"
+        android:textSize="40dp"
+        android:textColor="#2c3e50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="90dp"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/antempText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="온도: "
+        android:drawableLeft="@drawable/baseline_device_thermostat_24"
+        android:drawablePadding="10dp"
+        android:textSize="30sp"
+        android:textColor="#2c3e50"
+        android:fontFamily="@font/notosans"
+        app:layout_constraintBottom_toTopOf="@+id/anhumText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cityNameText"/>
+
+    <TextView
+        android:id="@+id/anhumText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="습도: "
+        android:drawableLeft="@drawable/baseline_water_drop_24"
+        android:textSize="30sp"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/notosans"
+        android:textColor="#2c3e50"
+        app:layout_constraintTop_toBottomOf="@+id/antempText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/getWeatherButton"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/getWeatherButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#3F51B5"
+        android:text="현재 온도 및 습도 가져오기"
+        android:fontFamily="@font/notosans"
+        android:textColor="#ffffff"
+        app:layout_constraintTop_toBottomOf="@+id/anhumText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="32dp"
+        android:padding="12dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

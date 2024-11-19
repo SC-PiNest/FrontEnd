@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center"
+    android:background="@drawable/background">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Smart HomeCare System"
+        android:fontFamily="@font/notosans"
+        android:textSize="22sp"
+        android:padding="0dp"
+        android:textColor="#3F51B5"
+        android:layout_gravity="center"
+        android:paddingBottom="16dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/black"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/info_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="회원정보입력"
+        android:textSize="20dp"
+        android:fontFamily="@font/notosans"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/info_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="회원님의 정보를 입력해주세요"
+        android:textColor="#808080"
+        android:fontFamily="@font/notosans"
+        android:layout_gravity="center"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <!-- 아이디 입력란 -->
+        <EditText
+            android:id="@+id/id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="아이디"
+            android:drawableLeft="@drawable/baseline_person_24"
+            android:drawablePadding="10dp"
+            android:inputType="text"
+            android:fontFamily="@font/notosans"
+            android:background="@android:drawable/edit_text"
+            android:layout_toStartOf="@id/checkDuplicateButton" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/checkDuplicateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="중복 확인"
+            android:padding="13dp"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#3F51B5"
+            android:fontFamily="@font/notosans"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"/>
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="비밀번호"
+        android:drawableLeft="@drawable/baseline_lock_24"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/notosans"
+        android:inputType="textPassword"
+        android:background="@android:drawable/edit_text"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/passwordConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="비밀번호 확인"
+        android:inputType="textPassword"
+        android:fontFamily="@font/notosans"
+        android:drawableLeft="@drawable/baseline_verified_user_24"
+        android:drawablePadding="10dp"
+        android:background="@android:drawable/edit_text"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/serialNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="시리얼 번호"
+        android:inputType="text"
+        android:fontFamily="@font/notosans"
+        android:drawableLeft="@drawable/baseline_add_home_24"
+        android:drawablePadding="10dp"
+        android:background="@android:drawable/edit_text"
+        android:layout_marginBottom="24dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/signUpButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="회원가입"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#3F51B5"
+        android:textSize="18sp"
+        android:fontFamily="@font/notosans"/>
+</LinearLayout>
