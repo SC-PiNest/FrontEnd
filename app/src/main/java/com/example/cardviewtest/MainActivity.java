@@ -251,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace(); // 예외 출력
                     }
                 } else {
-                    Toast.makeText(MainActivity.this, "잘못된 데이터 형식입니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "요청이 정상적으로 처리되었습니다.", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 Toast.makeText(MainActivity.this, "서버와 연결할 수 없습니다.", Toast.LENGTH_SHORT).show();
