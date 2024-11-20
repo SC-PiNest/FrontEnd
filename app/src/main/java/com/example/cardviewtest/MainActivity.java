@@ -1,5 +1,6 @@
 package com.example.cardviewtest;
 
+
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -84,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
         // 서버 연결 및 소켓 통신 테스트
         new SocketClientTask().execute(SERVER_IP, String.valueOf(SERVER_PORT), "3");
 
-        // MainActivity.java
         ImageButton refreshButton = findViewById(R.id.refreshButton); // 새로고침 버튼을 찾아줍니다.
         refreshButton.setOnClickListener(v -> {
             // 새로고침 버튼을 눌렀을 때 전송할 메시지 설정
@@ -93,8 +93,13 @@ public class MainActivity extends AppCompatActivity {
             // 서버로 메시지 전송 (SocketClientTask 사용)
             new SocketClientTask().execute(SERVER_IP, "44445", messageToSend);
 
-            // 알림 메시지 표시
-            Toast.makeText(MainActivity.this, "새로고침이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+            // AlertDialog를 사용하여 알림 메시지 표시
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("알림")
+                    .setMessage("새로고침이 완료되었습니다.")
+                    .setPositiveButton("확인", (dialog, which) -> dialog.dismiss())  // "확인" 버튼 클릭 시 다이얼로그 닫기
+                    .setCancelable(false)  // 사용자가 다이얼로그 외부를 클릭해도 닫히지 않게 설정
+                    .show();
         });
 
         // 전등 토글 기능
@@ -118,14 +123,33 @@ public class MainActivity extends AppCompatActivity {
 
             AlertDialog dialog = builder.create();
             dialog.show();
+
+            // 전등이 켜졌을 때만 메인 화면을 유지하고, 전환 없이 상태만 업데이트
+            if (isChecked) {
+                // 전등이 켜지면 해당 상태만 반영하고, 화면은 그대로 유지
+                lightSwitch.setChecked(true); // 전등 상태가 켜짐
+            }
         });
+
 
         // 감시모드 토글 기능
         surveillanceSwitch = findViewById(R.id.securitySwitch);
         surveillanceSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            // 감시모드 ON/OFF 상태를 서버로 전송
-            String messageToSend = isChecked ? "4" : "5"; // 감시모드 활성화 (4) / 비활성화 (5)
-            new SocketClientTask().execute(SERVER_IP, String.valueOf(SERVER_PORT), messageToSend);
+            String messageToSend;
+            String serverPort;
+
+            if (isChecked) {
+                // 감시모드 ON (4) -> 서버에 44444 포트로 메시지 전송
+                messageToSend = "4";
+                serverPort = "44445";
+            } else {
+                // 감시모드 OFF (0) -> 서버에 44443 포트로 메시지 전송
+                messageToSend = "0";
+                serverPort = "44443";
+            }
+
+            // 서버로 메시지 전송
+            new SocketClientTask().execute(SERVER_IP, serverPort, messageToSend);
 
             // AlertDialog 생성
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -140,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.show();
         });
-
     }
 
     public void onAlarmCardClick(View view) {

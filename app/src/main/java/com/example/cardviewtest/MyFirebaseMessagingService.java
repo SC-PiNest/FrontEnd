@@ -11,6 +11,10 @@ import androidx.core.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
@@ -26,6 +30,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // 데이터 페이로드 처리
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+            // 데이터 페이로드에 따라 추가 작업 수행 가능
         }
 
         // 알림 페이로드 처리
@@ -44,7 +49,36 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onNewToken(String token) {
         super.onNewToken(token);
-        Log.d(TAG, "Refreshed token: " + token); // 로그로 토큰 출력
+        Log.d(TAG, "Refreshed token: " + token);
+
+        // Firebase 토큰을 파일에 저장
+        saveTokenToFile(token);
+    }
+
+    /**
+     * Firebase 등록 토큰을 파일에 저장
+     *
+     * @param token Firebase 등록 토큰
+     */
+    private void saveTokenToFile(String token) {
+        FileOutputStream fos = null;
+        try {
+            // 파일을 내부 저장소에 생성
+            File file = new File(getFilesDir(), "fcm_token.txt");
+            fos = new FileOutputStream(file);
+            fos.write(token.getBytes()); // 토큰을 파일에 씁니다.
+            Log.d(TAG, "Token saved to file: " + file.getAbsolutePath());
+        } catch (IOException e) {
+            Log.e(TAG, "Failed to save token to file", e);
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     /**
