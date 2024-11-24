@@ -13,10 +13,10 @@ public interface ApiService {
     Call<SignUpResponse> signUp(@Body SignUpRequest request);
 
     // POST 요청을 통해 서버로 로그인 요청
-    // 로그인 요청 (POST 요청)
     @POST("/user/login")
     Call<LoginResponse> login(@Body LoginRequest loginRequest);
 
+    // 로그인버튼 중복요청확인
     @GET("/user/check-id/{id}")
     Call<ResponseBody> checkDuplicate(@Path("id") String id);
 }

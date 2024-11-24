@@ -5,19 +5,14 @@
     android:orientation="vertical"
     android:padding="24dp"
     android:gravity="center"
-    android:background="@drawable/background">
+    android:background="#FFFFFFFF">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Smart HomeCare System"
-        android:fontFamily="@font/notosans"
-        android:textSize="22sp"
-        android:padding="0dp"
-        android:textColor="#3F51B5"
-        android:layout_gravity="center"
-        android:paddingBottom="16dp"/>
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:src="@drawable/logo"
+        android:layout_marginBottom="8dp"/>
 
     <View
         android:layout_width="match_parent"
