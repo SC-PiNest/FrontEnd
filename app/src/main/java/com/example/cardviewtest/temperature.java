@@ -38,7 +38,7 @@ public class temperature extends AppCompatActivity {
     private Button getWeatherButton;
     private FusedLocationProviderClient fusedLocationClient;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
-    private String apiKey = "5686eb093dd50f78f3eac346deb3bb0c";  // OpenWeatherMap API 키
+    private String apiKey = "";  // OpenWeatherMap API 키
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
