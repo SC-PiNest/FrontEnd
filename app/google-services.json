@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "221076427372",
-    "project_id": "group-project-1c386",
-    "storage_bucket": "group-project-1c386.firebasestorage.app"
+    "project_number": "",
+    "project_id": "",
+    "storage_bucket": ""
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:221076427372:android:d056527b0d8a3cd6e13e49",
+        "mobilesdk_app_id": "",
         "android_client_info": {
           "package_name": "com.example.cardviewtest"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBDNY-uMxsyVX35WW6IJNEF_YG831oEgYU"
+          "current_key": ""
         }
       ],
       "services": {
