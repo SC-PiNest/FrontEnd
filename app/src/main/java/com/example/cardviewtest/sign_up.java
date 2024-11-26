@@ -1,6 +1,8 @@
 package com.example.cardviewtest;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -119,11 +121,21 @@ public class sign_up extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            Toast.makeText(sign_up.this, "회원가입 성공!", Toast.LENGTH_SHORT).show();
-                            // 로그인 화면으로 이동
-                            Intent intent = new Intent(sign_up.this, login.class);
-                            startActivity(intent);
-                            finish();
+                            // 회원가입 성공 시 AlertDialog로 메시지 표시
+                            AlertDialog.Builder builder = new AlertDialog.Builder(sign_up.this);
+                            builder.setTitle("회원가입 성공");
+                            builder.setMessage("회원가입이 완료되었습니다. 로그인 화면으로 이동합니다.");
+                            builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // 로그인 화면으로 이동
+                                    Intent intent = new Intent(sign_up.this, login.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            });
+                            builder.setCancelable(false); // 외부 터치로 닫히지 않게 설정
+                            builder.show();
                         } else {
                             Toast.makeText(sign_up.this, "회원가입 실패", Toast.LENGTH_SHORT).show();
                         }
