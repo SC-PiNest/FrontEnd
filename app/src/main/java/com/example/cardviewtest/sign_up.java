@@ -1,12 +1,12 @@
 package com.example.cardviewtest;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -50,7 +50,7 @@ public class sign_up extends AppCompatActivity {
                 String id = idField.getText().toString().trim();
 
                 if (id.isEmpty()) {
-                    showAlert("경고", "아이디를 입력해주세요.");
+                    Toast.makeText(sign_up.this, "아이디를 입력해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -62,17 +62,17 @@ public class sign_up extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             // 아이디가 사용 가능
                             isIdAvailable = true;
-                            showAlert("성공", "아이디 사용 가능");
+                            Toast.makeText(sign_up.this, "아이디 사용 가능", Toast.LENGTH_SHORT).show();
                         } else {
                             // 아이디가 이미 존재
                             isIdAvailable = false;
-                            showAlert("알림", "아이디가 이미 존재합니다.");
+                            Toast.makeText(sign_up.this, "아이디가 이미 존재합니다.", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        showAlert("에러", "서버 연결 실패");
+                        Toast.makeText(sign_up.this, "서버 연결 실패", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -84,7 +84,7 @@ public class sign_up extends AppCompatActivity {
             public void onClick(View v) {
                 // 중복 확인이 안 되었으면 경고 메시지 출력
                 if (!isIdAvailable) {
-                    showAlert("경고", "아이디 중복 확인을 먼저 해주세요.");
+                    Toast.makeText(sign_up.this, "아이디 중복 확인을 먼저 해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -95,12 +95,18 @@ public class sign_up extends AppCompatActivity {
 
                 // 입력 값 오류 검사
                 if (id.isEmpty() || password.isEmpty() || serialNumber.isEmpty()) {
-                    showAlert("경고", "모든 칸을 입력해주세요.");
+                    Toast.makeText(sign_up.this, "모든 칸을 입력해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (!password.equals(passwordConfirm)) {
-                    showAlert("경고", "비밀번호가 일치하지 않습니다.");
+                    Toast.makeText(sign_up.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // 시리얼 넘버 확인 추가
+                if (!serialNumber.equals("100000004f5cb06c")) {
+                    Toast.makeText(sign_up.this, "유효하지 않은 시리얼 넘버입니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -113,33 +119,22 @@ public class sign_up extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            showAlert("성공", "회원가입 성공!");
+                            Toast.makeText(sign_up.this, "회원가입 성공!", Toast.LENGTH_SHORT).show();
                             // 로그인 화면으로 이동
                             Intent intent = new Intent(sign_up.this, login.class);
                             startActivity(intent);
                             finish();
                         } else {
-                            showAlert("실패", "회원가입 실패");
+                            Toast.makeText(sign_up.this, "회원가입 실패", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<SignUpResponse> call, Throwable t) {
-                        showAlert("에러", "서버 연결 실패");
+                        Toast.makeText(sign_up.this, "서버 연결 실패", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         });
-    }
-
-    // AlertDialog를 띄우는 메서드
-    private void showAlert(String title, String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(sign_up.this);
-        builder.setTitle(title)
-                .setMessage(message)
-                .setPositiveButton("확인", (dialog, which) -> dialog.dismiss())
-                .setCancelable(true);
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 }
